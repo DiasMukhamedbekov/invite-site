@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!doctype html>
 <html lang="kk">
 <head>
@@ -15,6 +16,16 @@
 </head>
 
 <body>
+  <!-- ✅ Animated background layers -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__photo"></div>
+    <div class="bg__tint"></div>
+    <div class="bg__mesh"></div>
+    <div class="bg__bokeh" id="bokehLayer"></div>
+    <div class="bg__sparkles" id="sparkleLayer"></div>
+    <div class="bg__grain"></div>
+  </div>
+
   <!-- ✅ One fixed watermark for entire site -->
   <div class="site-watermark" aria-hidden="true">D&A</div>
 
@@ -272,4 +283,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
