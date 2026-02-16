@@ -13,42 +13,46 @@ const $ = (id) => document.getElementById(id);
 const pad2 = (n) => String(n).padStart(2, "0");
 
 // =======================
-// ✅ MUSIC: autoplay muted -> unmute after first click + fade in
+// ✅ MUSIC (mobile-friendly)
+// autoplay muted -> unmute after first gesture (touch/click/scroll)
 // =======================
 function setupBackgroundMusic() {
   const music = $("bg-music");
   if (!music) return;
 
-  // на всякий: стартуем тихо после разблокировки
-  const TARGET_VOLUME = 0.35;
+  const TARGET_VOLUME = 0.35; // тихий фон
+  let unlocked = false;
 
-  const enableSoundOnce = async () => {
+  const unlock = async () => {
+    if (unlocked) return;
+    unlocked = true;
+
     try {
       music.muted = false;
       music.volume = 0;
 
-      // иногда браузеру надо явное play() после жеста
+      // на некоторых телефонах нужно явно play() после жеста
       await music.play().catch(() => {});
 
-      let vol = 0;
-      const step = 0.03;
-      const tickMs = 180;
-
+      // плавное повышение громкости
+      let v = 0;
       const fade = setInterval(() => {
-        vol = Math.min(TARGET_VOLUME, vol + step);
-        music.volume = vol;
-        if (vol >= TARGET_VOLUME) clearInterval(fade);
-      }, tickMs);
-
-      document.removeEventListener("click", enableSoundOnce);
-      document.removeEventListener("touchstart", enableSoundOnce);
+        v = Math.min(TARGET_VOLUME, v + 0.03);
+        music.volume = v;
+        if (v >= TARGET_VOLUME) clearInterval(fade);
+      }, 180);
     } catch {
-      // молча: если браузер упёрся, ничего страшного
+      // если браузер не дал — ок, хоть muted будет
     }
+
+    document.removeEventListener("click", unlock);
+    document.removeEventListener("touchstart", unlock);
+    document.removeEventListener("scroll", unlock);
   };
 
-  document.addEventListener("click", enableSoundOnce, { passive: true });
-  document.addEventListener("touchstart", enableSoundOnce, { passive: true });
+  document.addEventListener("click", unlock, { passive: true });
+  document.addEventListener("touchstart", unlock, { passive: true });
+  document.addEventListener("scroll", unlock, { passive: true, once: true });
 }
 
 // =======================
@@ -96,8 +100,8 @@ async function sendToGoogleSheets(payload) {
   });
 
   const text = await res.text();
-
   let data;
+
   try {
     data = JSON.parse(text);
   } catch {
