@@ -13,13 +13,13 @@
   /* ФОН */
   --bg-image:url("./assets/bg.jpg");
 
-  /* ✅ затемнение фона (увеличь, если надо темнее: 0.18 -> 0.24) */
+  /* затемнение фона */
   --bg-dim: 0.18;
 
   /* JS будет обновлять --vh для мобильных */
   --vh: 1vh;
 
-  /* ✅ JS выставляет полную высоту документа */
+  /* JS выставляет полную высоту документа */
   --docH: 100vh;
 }
 
@@ -34,13 +34,9 @@ body{
   line-height:1.55;
   text-align:center;
 
-  /* фон-запаска */
   background:#f7effa;
 
-  /* важно: чтобы absolute bg был привязан к body */
   position:relative;
-
-  /* убираем горизонтальный скролл на всякий */
   overflow-x:hidden;
 }
 
@@ -56,39 +52,47 @@ a{ color:inherit; text-decoration:none; }
 .stack{ display:grid; gap:14px; }
 
 /* =========================
-   BG: FULL PAGE (TOP=TOP, BOTTOM=BOTTOM)
+   BG: FULL PAGE
 ========================= */
 .bg{
-  position:absolute;        /* ✅ было fixed */
+  position:absolute;
   top:0;
   left:0;
   right:0;
-  height:var(--docH);       /* ✅ вся высота страницы */
+  height:var(--docH);
   z-index:0;
   pointer-events:none;
   overflow:hidden;
 
-  /* чтобы при любых режимах не было “пустого” фона */
   background:radial-gradient(1200px 700px at 50% 25%, rgba(227,155,191,.22), transparent 65%),
              radial-gradient(900px 600px at 40% 70%, rgba(189,166,255,.20), transparent 55%),
              #f7effa;
 }
 
-/* ✅ Фото: растянуть на ВСЮ высоту сайта (верх=верх, низ=низ) */
+/* ✅ DESKTOP DEFAULT: top=top, bottom=bottom (растягивание на весь сайт) */
 .bg__photo{
   position:absolute;
   inset:0;
 
   background-image: var(--bg-image);
   background-repeat:no-repeat;
+  background-position:center top;
 
-  /* верх картинки = верх сайта */
-  background-position: center top;
-
-  /* ✅ ключевое: растяжение на всю ширину/высоту страницы */
+  /* десктоп-режим “вписать всю страницу” */
   background-size: 100% 100%;
 
   transform:none !important;
+}
+
+/* ✅ MOBILE FIX: никакого растягивания -> картинка четкая */
+@media (max-width: 900px), (max-aspect-ratio: 3/4){
+  .bg__photo{
+    /* заполняем экран без деформации */
+    background-size: cover;
+
+    /* можно чуть выше центра, чтобы верхние цветы были видны */
+    background-position: center 15%;
+  }
 }
 
 /* ✅ затемнение */
@@ -134,10 +138,7 @@ a{ color:inherit; text-decoration:none; }
 .hero{
   position:relative;
 
-  /* ✅ мобильный safe viewport */
   min-height: calc(var(--vh) * 100);
-
-  /* современные браузеры */
   min-height: 100svh;
   min-height: 100dvh;
 
