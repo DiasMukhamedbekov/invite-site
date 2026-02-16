@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Үйлену тойына шақыру" />
 
-  <title>Тойға шақыру — Диас & Арай</title>
+  <title>Тойға шақыру — Арай & Диас</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,7 +38,7 @@
       </div>
 
       <h1 class="title">
-        <span class="title__names">Диас & Арай</span>
+        <span class="title__names">Арай & Диас</span>
       </h1>
 
       <div class="hero__actions">
@@ -196,14 +196,17 @@
       <div class="container">
         <div class="section__head">
           <h2 class="section__title">Қатысуды растау</h2>
-          <p class="section__subtitle">Төмендегі форманы толтырып жіберіңіз — бізге дайындыққа өте қажет.</p>
+          <p class="section__subtitle">
+            Төмендегі форманы толтырып жіберіңіз — бізге дайындыққа өте қажет.
+          </p>
         </div>
 
         <div class="rsvp">
           <form class="form" id="rsvpForm" autocomplete="on">
             <div class="field">
               <label class="label" for="guestName">Аты-жөніңіз</label>
-              <input class="input" id="guestName" name="guestName" type="text" placeholder="Мысалы: Мұхамедбеков Диас" required minlength="2" />
+              <input class="input" id="guestName" name="guestName" type="text"
+                     placeholder="Мысалы: Мұхамедбеков Диас" required minlength="2" />
             </div>
 
             <div class="field">
@@ -219,7 +222,8 @@
             <div class="field field--2">
               <div>
                 <label class="label" for="guestsCount">Қанша адам болып келесіз?</label>
-                <input class="input" id="guestsCount" name="guestsCount" type="number" min="1" max="10" value="1" required />
+                <input class="input" id="guestsCount" name="guestsCount" type="number"
+                       min="1" max="10" value="1" required />
               </div>
               <div>
                 <label class="label" for="phone">Байланыс нөмірі (міндетті емес)</label>
@@ -229,7 +233,8 @@
 
             <div class="field">
               <label class="label" for="comment">Қосымша ақпарат немесе тілектер</label>
-              <textarea class="input textarea" id="comment" name="comment" rows="4" placeholder="Мысалы: аллергия, тағам бойынша өтініш және т.б."></textarea>
+              <textarea class="input textarea" id="comment" name="comment" rows="4"
+                        placeholder="Мысалы: аллергия, тағам бойынша өтініш және т.б."></textarea>
             </div>
 
             <div class="form__actions">
@@ -253,18 +258,17 @@
     <div class="container footer__inner">
       <div class="footer__left">
         <div class="footer__title">Сіздерді асыға күтеміз!</div>
-        <div class="footer__names">Диас & Арай</div>
+        <div class="footer__names">Арай & Диас</div>
       </div>
       <a class="btn btn--small btn--ghost" href="#top">Жоғары</a>
     </div>
   </footer>
 
-  <!-- ✅ Background music: autoplay (muted) + unmute after first user click -->
-  <audio id="bg-music" autoplay loop muted preload="auto">
+  <!-- ✅ MUSIC (mobile friendly): autoplay muted, unmute after first user gesture -->
+  <audio id="bg-music" autoplay loop muted preload="auto" playsinline>
     <source src="assets/music.mp3" type="audio/mpeg">
   </audio>
 
   <script src="script.js"></script>
 </body>
 </html>
-
