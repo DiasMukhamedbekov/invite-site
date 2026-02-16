@@ -1,5 +1,3 @@
-// script.js
-
 const WEDDING_DATE_ISO = "2026-06-26T16:00:00";
 
 const RSVP_ENDPOINT_URL =
