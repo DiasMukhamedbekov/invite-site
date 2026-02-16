@@ -1,8 +1,5 @@
 // script.js
 
-// =======================
-// НАСТРОЙКЫ
-// =======================
 const WEDDING_DATE_ISO = "2026-06-26T16:00:00";
 
 const RSVP_ENDPOINT_URL =
@@ -11,9 +8,7 @@ const RSVP_ENDPOINT_URL =
 const $ = (id) => document.getElementById(id);
 const pad2 = (n) => String(n).padStart(2, "0");
 
-// =======================
 // ✅ Mobile viewport height fix
-// =======================
 function setupVhUnit() {
   const set = () => {
     const vh = window.innerHeight * 0.01;
@@ -24,18 +19,7 @@ function setupVhUnit() {
   window.addEventListener("orientationchange", set, { passive: true });
 }
 
-// =======================
-// ✅ LIVE BACKGROUND (теперь БЕЗ движения фото)
-// =======================
-function setupLiveBackground() {
-  // Раньше ты двигал/скейлил bgPhoto => при contain это будет давать края.
-  // Оставляем функцию пустой, чтобы код не падал и не трогал фон.
-  return;
-}
-
-// =======================
-// ✅ MUSIC (mobile-friendly)
-// =======================
+// ✅ MUSIC
 function setupBackgroundMusic() {
   const music = $("bg-music");
   if (!music) return;
@@ -50,7 +34,6 @@ function setupBackgroundMusic() {
     try {
       music.muted = false;
       music.volume = 0;
-
       await music.play().catch(() => {});
 
       let v = 0;
@@ -59,9 +42,7 @@ function setupBackgroundMusic() {
         music.volume = v;
         if (v >= TARGET_VOLUME) clearInterval(fade);
       }, 180);
-    } catch {
-      // ok
-    }
+    } catch {}
 
     document.removeEventListener("click", unlock);
     document.removeEventListener("touchstart", unlock);
@@ -73,9 +54,7 @@ function setupBackgroundMusic() {
   document.addEventListener("scroll", unlock, { passive: true, once: true });
 }
 
-// =======================
 // ТАЙМЕР
-// =======================
 function startCountdown() {
   const target = new Date(WEDDING_DATE_ISO);
 
@@ -107,9 +86,7 @@ function startCountdown() {
   setInterval(tick, 1000);
 }
 
-// =======================
 // RSVP -> Google Sheets
-// =======================
 async function sendToGoogleSheets(payload) {
   const res = await fetch(RSVP_ENDPOINT_URL, {
     method: "POST",
@@ -120,11 +97,8 @@ async function sendToGoogleSheets(payload) {
   const text = await res.text();
   let data;
 
-  try {
-    data = JSON.parse(text);
-  } catch {
-    data = { ok: false, raw: text };
-  }
+  try { data = JSON.parse(text); }
+  catch { data = { ok: false, raw: text }; }
 
   if (!data.ok) throw new Error(data.error || "Жіберу сәтсіз болды");
   return data;
@@ -135,29 +109,22 @@ function setupRSVP() {
   const thanks = $("thanksBox");
   const backBtn = $("backToFormBtn");
   const submitBtn = $("submitBtn");
-
   if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const guestName = $("guestName").value.trim();
-    const attendance = $("attendance").value;
-    const guestsCount = Number($("guestsCount").value);
-    const phone = $("phone").value.trim();
-    const comment = $("comment").value.trim();
-
     const payload = {
-      guestName,
-      attendance,
-      guestsCount: Number.isFinite(guestsCount) ? guestsCount : 1,
-      phone: phone || "",
-      comment: comment || "",
+      guestName: $("guestName").value.trim(),
+      attendance: $("attendance").value,
+      guestsCount: Number($("guestsCount").value) || 1,
+      phone: $("phone").value.trim() || "",
+      comment: $("comment").value.trim() || "",
       createdAt: new Date().toISOString(),
       userAgent: navigator.userAgent,
     };
 
-    const oldText = submitBtn ? submitBtn.textContent : "";
+    const oldText = submitBtn?.textContent || "";
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.textContent = "Жіберілуде…";
@@ -165,10 +132,8 @@ function setupRSVP() {
 
     try {
       await sendToGoogleSheets(payload);
-
       form.hidden = true;
       if (thanks) thanks.hidden = false;
-
       form.reset();
       $("guestsCount").value = "1";
     } catch (err) {
@@ -181,18 +146,14 @@ function setupRSVP() {
     }
   });
 
-  if (backBtn) {
-    backBtn.addEventListener("click", () => {
-      if (thanks) thanks.hidden = true;
-      form.hidden = false;
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
+  backBtn?.addEventListener("click", () => {
+    if (thanks) thanks.hidden = true;
+    form.hidden = false;
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
-// =======================
-// ✅ Scroll reveal
-// =======================
+// Reveal
 function setupScrollReveal() {
   const items = document.querySelectorAll(".reveal");
   if (!items.length) return;
@@ -212,9 +173,7 @@ function setupScrollReveal() {
   items.forEach((el) => io.observe(el));
 }
 
-// =======================
-// ✅ Slower smooth scroll for anchors
-// =======================
+// Smooth anchor scroll
 function setupSlowAnchorScroll() {
   const links = document.querySelectorAll('a[href^="#"]');
   if (!links.length) return;
@@ -233,7 +192,6 @@ function setupSlowAnchorScroll() {
       window.scrollTo(0, startY + diff * eased);
       if (t < 1) requestAnimationFrame(step);
     }
-
     requestAnimationFrame(step);
   }
 
@@ -242,7 +200,6 @@ function setupSlowAnchorScroll() {
       const id = a.getAttribute("href");
       const target = document.querySelector(id);
       if (!target) return;
-
       e.preventDefault();
       const y = target.getBoundingClientRect().top + window.scrollY;
       animateScrollTo(y, 1000);
@@ -250,12 +207,8 @@ function setupSlowAnchorScroll() {
   });
 }
 
-// =======================
-// START
-// =======================
 document.addEventListener("DOMContentLoaded", () => {
   setupVhUnit();
-  setupLiveBackground();
   setupBackgroundMusic();
   startCountdown();
   setupRSVP();
