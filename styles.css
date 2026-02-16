@@ -1,21 +1,21 @@
-/* styles.css (FULLSCREEN COVER MODE) */
+/* styles.css (FIT TO SCREEN MODE) */
 :root{
   --plum:#4a2367;
   --ink:rgba(45,18,62,.95);
   --muted:rgba(45,18,62,.66);
 
+  --lavender:#bda6ff;
+  --rose:#e39bbf;
+
   --radius:18px;
   --radius2:28px;
   --max:1100px;
 
-  --bg-image:url("./assets/bg.jpg");
+  /* ФОН */
+  --bg-image:url("assets/bg.jpg");
 
-  /* mobile vh fix */
+  /* JS будет обновлять --vh для мобильных */
   --vh: 1vh;
-
-  /* Тонкая подстройка кадра */
-  --bg-pos-x: 75%;
-  --bg-pos-y: 75%;
 }
 
 *{ box-sizing:border-box; }
@@ -28,10 +28,15 @@ body{
   color:var(--ink);
   line-height:1.55;
   text-align:center;
-  overflow-x:hidden;
+
+  /* фон-запаска */
   background:#f7effa;
+
+  /* убираем горизонтальный скролл на всякий */
+  overflow-x:hidden;
 }
 
+body::selection{ background:rgba(189,166,255,.28); }
 a{ color:inherit; text-decoration:none; }
 
 .container{
@@ -43,7 +48,7 @@ a{ color:inherit; text-decoration:none; }
 .stack{ display:grid; gap:14px; }
 
 /* =========================
-   BG: FULLSCREEN COVER
+   BG: FIT TO SCREEN (contain)
 ========================= */
 .bg{
   position:fixed;
@@ -51,38 +56,30 @@ a{ color:inherit; text-decoration:none; }
   z-index:0;
   pointer-events:none;
   overflow:hidden;
-  background:#f7effa;
+
+  /* чтобы при contain не было "черных" полей — мягкий фон */
+  background:radial-gradient(1200px 700px at 50% 25%, rgba(227,155,191,.22), transparent 60%),
+             radial-gradient(900px 600px at 40% 70%, rgba(189,166,255,.20), transparent 55%),
+             #f7effa;
 }
 
+/* ✅ Фото: всегда в пределах экрана (не вылезает) */
 .bg__photo{
   position:absolute;
   inset:0;
 
-  background-image:var(--bg-image);
+  background-image: var(--bg-image);
   background-repeat:no-repeat;
+  background-position:center center;
 
-  /* ✅ заполняем экран */
-  background-size:cover;
+  /* ключевое: полностью помещаем картинку в экран */
+  background-size: contain;
 
-  /* ✅ фокус кадра (можно менять) */
-  background-position: var(--bg-pos-x) var(--bg-pos-y);
-
-  /* ✅ никаких уезжаний */
+  /* никаких трансформаций от JS */
   transform:none !important;
 }
 
-/* ✅ лёгкая “вуаль”, чтобы текст читался и фон выглядел мягче */
-.bg::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(1200px 800px at 50% 25%, rgba(255,255,255,.22), transparent 60%),
-    linear-gradient(180deg, rgba(247,239,250,.25), rgba(247,239,250,.35));
-  pointer-events:none;
-}
-
-/* Влияющие слои выключены */
+/* ❌ Все “влияющие” слои можно оставить выключенными */
 .bg__tint,
 .bg__mesh,
 .bg__bokeh,
@@ -108,6 +105,7 @@ a{ color:inherit; text-decoration:none; }
   transform:translateY(2vh);
 }
 
+/* контент поверх */
 .hero, main, footer{ position:relative; z-index:3; }
 
 /* =========================
@@ -115,9 +113,14 @@ a{ color:inherit; text-decoration:none; }
 ========================= */
 .hero{
   position:relative;
+
+  /* ✅ мобильный safe viewport */
   min-height: calc(var(--vh) * 100);
+
+  /* современные браузеры */
   min-height: 100svh;
   min-height: 100dvh;
+
   display:flex;
   align-items:center;
   overflow:hidden;
@@ -132,7 +135,7 @@ a{ color:inherit; text-decoration:none; }
 
 .hero__content{ position:relative; padding:68px 0; }
 
-/* UI элементы (твои) */
+/* UI элементы */
 .badge{
   display:inline-flex;
   align-items:center;
@@ -242,13 +245,336 @@ a{ color:inherit; text-decoration:none; }
 }
 
 /* =========================
-   остальной CSS можешь оставить как был
-   (sections/cards/calendar/rsvp/footer/reveal/mobile)
+   SECTIONS
 ========================= */
+.section{ padding:72px 0; }
 
-/* MOBILE: чуть смещаем фокус, чтобы лучше смотрелось */
+.section--alt{
+  background:rgba(255,255,255,.35);
+  border-top:1px solid rgba(255,255,255,.35);
+  border-bottom:1px solid rgba(255,255,255,.30);
+}
+
+.section__head{ text-align:center; margin-bottom:18px; }
+
+.section__title{
+  margin:0;
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(28px,3.1vw,42px);
+  color:rgba(74,35,103,.94);
+  text-shadow:0 1px 0 rgba(255,255,255,.75);
+}
+
+.section__subtitle{
+  margin:10px auto 0;
+  max-width:760px;
+  color:rgba(45,18,62,.72);
+  font-size:15px;
+}
+
+.card{
+  padding:18px;
+  border:1px solid rgba(123,77,187,.14);
+  background:rgba(255,255,255,.86);
+  border-radius:var(--radius2);
+  box-shadow:0 18px 55px rgba(35,15,55,.14);
+  backdrop-filter:blur(12px);
+  text-align:center;
+}
+
+.card__title{
+  margin:0 0 8px;
+  font-size:18px;
+  font-weight:800;
+  color:rgba(74,35,103,.94);
+}
+
+.card__text{ margin:0; color:rgba(45,18,62,.90); }
+
+/* CALENDAR */
+.calendar-wrap{ display:flex; justify-content:center; }
+
+.calendar-card{
+  max-width:760px;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+}
+
+.calendar-card__top{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(123,77,187,.12);
+  text-align:left;
+}
+
+.calendar-card__kicker{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(74,35,103,.70);
+}
+
+.calendar-card__month{ margin-top:6px; font-size:18px; font-weight:900; }
+
+.calendar-card__time{ text-align:right; min-width:120px; }
+
+.calendar-card__time-label{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(74,35,103,.70);
+  font-weight:900;
+}
+
+.calendar-card__time-value{
+  margin-top:6px;
+  font-size:22px;
+  font-weight:900;
+  color:rgba(74,35,103,.94);
+}
+
+.calendar-grid{
+  position:relative;
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(7, minmax(0, 1fr));
+  gap:10px;
+}
+
+.cal-dow{
+  font-size:12px;
+  font-weight:900;
+  color:rgba(74,35,103,.72);
+  text-align:center;
+  padding:6px 0;
+}
+
+.cal-day{
+  text-align:center;
+  padding:10px 0;
+  border:1px solid rgba(123,77,187,.12);
+  border-radius:14px;
+  background:rgba(255,255,255,.70);
+  color:rgba(45,18,62,.92);
+  font-weight:800;
+  backdrop-filter:blur(10px);
+}
+
+.cal-day--active{
+  background:linear-gradient(180deg, rgba(189,166,255,.92), rgba(227,155,191,.78));
+  border-color:rgba(123,77,187,.22);
+  box-shadow:0 16px 40px rgba(35,15,55,.16);
+  transform:translateY(-1px);
+}
+
+.calendar-card__bottom{
+  position:relative;
+  margin-top:14px;
+  padding-top:10px;
+  border-top:1px solid rgba(123,77,187,.10);
+  color:rgba(45,18,62,.70);
+}
+
+/* COUNTDOWN */
+.countdown{
+  margin:18px auto 10px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.countdown__item{
+  min-width:96px;
+  padding:14px 12px;
+  border:1px solid rgba(123,77,187,.14);
+  background:rgba(255,255,255,.78);
+  border-radius:var(--radius);
+  backdrop-filter:blur(12px);
+  box-shadow:0 12px 38px rgba(35,15,55,.14);
+}
+
+.countdown__num{
+  font-size:30px;
+  font-weight:900;
+  color:rgba(74,35,103,.94);
+}
+
+.countdown__label{
+  font-size:12px;
+  color:rgba(45,18,62,.62);
+  margin-top:2px;
+  text-transform:lowercase;
+}
+
+/* OWNERS */
+.owners{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  padding:22px;
+  flex-wrap:wrap;
+  row-gap:10px;
+}
+
+.owners__name{
+  font-family:"Marck Script",cursive;
+  font-size:40px;
+  color:rgba(74,35,103,.94);
+  text-shadow:0 2px 0 rgba(255,255,255,.75);
+}
+
+.owners__plus{
+  font-weight:900;
+  font-size:20px;
+  color:rgba(74,35,103,.55);
+}
+
+.owners__phones{
+  width:100%;
+  margin-top:6px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  color:rgba(45,18,62,.78);
+  font-weight:700;
+  font-size:14px;
+}
+
+.owners__phone{
+  color:rgba(74,35,103,.92);
+  border-bottom:1px dashed rgba(123,77,187,.35);
+  padding-bottom:2px;
+  transition:opacity .2s ease;
+}
+.owners__phone:hover{ opacity:.85; }
+.owners__sep{ color:rgba(45,18,62,.55); }
+
+/* RSVP */
+.rsvp{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin-top:22px;
+  align-items:start;
+}
+
+.form{
+  padding:18px;
+  border:1px solid rgba(123,77,187,.14);
+  background:rgba(255,255,255,.86);
+  border-radius:var(--radius2);
+  box-shadow:0 18px 55px rgba(35,15,55,.14);
+  backdrop-filter:blur(12px);
+  text-align:center;
+}
+
+.field{ margin-bottom:12px; }
+
+.field--2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.label{
+  display:block;
+  font-size:13px;
+  color:rgba(45,18,62,.72);
+  margin:0 0 6px;
+  font-weight:700;
+}
+
+.input{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(123,77,187,.16);
+  background:rgba(255,255,255,.92);
+  color:rgba(45,18,62,.94);
+  outline:none;
+  text-align:center;
+  font:inherit;
+}
+
+.input:focus{
+  border-color:rgba(123,77,187,.42);
+  box-shadow:0 0 0 4px rgba(189,166,255,.20);
+}
+
+.textarea{ resize:vertical; min-height:110px; }
+
+.form__actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.tiny{ font-size:12px; }
+.muted{ color:var(--muted); }
+
+.thanks{
+  padding:18px;
+  border:1px solid rgba(227,155,191,.35);
+  background:rgba(255,245,235,.22);
+  border-radius:var(--radius2);
+  box-shadow:0 18px 55px rgba(35,15,55,.14);
+  backdrop-filter:blur(12px);
+}
+
+.thanks__title{
+  margin:0 0 6px;
+  font-size:20px;
+  color:rgba(74,35,103,.94);
+}
+
+.thanks__text{
+  margin:0 0 12px;
+  color:rgba(45,18,62,.88);
+}
+
+/* FOOTER */
+.footer{ padding:26px 0; }
+
+.footer__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border-top:1px solid rgba(255,255,255,.35);
+  padding-top:18px;
+}
+
+.footer__title{ font-weight:900; color:rgba(74,35,103,.94); }
+
+.footer__names{
+  margin-top:6px;
+  font-family:"Marck Script",cursive;
+  font-size:28px;
+  color:rgba(74,35,103,.94);
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .95s ease, transform .95s ease;
+  will-change:opacity, transform;
+}
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+/* MOBILE */
 @media (max-width:900px){
-  :root{ --bg-pos-y: 40%; }
   .field--2{ grid-template-columns:1fr; }
   .hero__actions{ flex-direction:column; }
   .btn{ width:min(320px,100%); margin:0 auto; }
@@ -256,11 +582,8 @@ a{ color:inherit; text-decoration:none; }
 }
 
 @media (max-width:420px){
-  :root{ --bg-pos-y: 35%; } /* на узких — обычно ещё выше */
   .calendar-grid{ gap:8px; }
   .cal-day{ padding:9px 0; border-radius:12px; }
   .owners__phones{ flex-direction:column; gap:6px; }
   .owners__sep{ display:none; }
 }
-
-
