@@ -1,279 +1,269 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="kk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Үйлену тойына шақыру — Арай & Диас" />
+  <meta name="description" content="Үйлену тойына шақыру" />
 
-  <title>Тойға шақыру — Диас & Арай</title>
+  <title>Тойға шақыру — Арай & Диас</title>
 
-  <!-- ✅ Favicon (положи favicon.png рядом с index.html) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png" />
-  <link rel="apple-touch-icon" href="favicon.png" />
-  <meta name="theme-color" content="#f1e4f3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- ✅ Fonts (быстрее загрузка) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Marck+Script&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- ✅ Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Marck+Script&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <!-- ✅ One fixed watermark for entire site -->
-    <div class="site-watermark" aria-hidden="true">D&A</div>
+  <!-- ✅ One fixed watermark for entire site -->
+  <div class="site-watermark" aria-hidden="true">D&A</div>
 
-    <header class="hero" id="top">
-        <div class="hero__bg" aria-hidden="true"></div>
-        <div class="hero__overlay" aria-hidden="true"></div>
+  <header class="hero" id="top">
+    <div class="hero__overlay" aria-hidden="true"></div>
 
-        <div class="container hero__content">
-            <!-- ✅ Main headline badge -->
-            <div class="badge badge--big">Тойға шақыру</div>
+    <div class="container hero__content">
+      <div class="badge badge--big">Тойға шақыру</div>
 
-            <div class="invite-text">
-                <p class="invite-text__lead">
-                    Құрметті ағайын-туыс, құда-жекжат, көршілер!
-                </p>
+      <div class="invite-text">
+        <p class="invite-text__lead">
+          Құрметті ағайын-туыс, құда-жекжат, көршілер!
+        </p>
 
-                <p class="invite-text__line">
-                    Сіздерді балаларымыз
-                    <span class="names-inline">Диас пен Арайдың</span>
-                    шаңырақ көтеру құрметіне арналған салтанатты ақ дастарханымыздың
-                    қадірлі қонағы болуға шын жүректен шақырамыз.
-                </p>
-            </div>
+        <p class="invite-text__line">
+          Сіздерді балаларымыз
+          <span class="names-inline">Диас пен Арайдың</span>
+          шаңырақ көтеру құрметіне арналған салтанатты ақ дастарханымыздың
+          қадірлі қонағы болуға шын жүректен шақырамыз.
+        </p>
+      </div>
 
-            <h1 class="title">
-                <span class="title__names">Диас & Арай</span>
-            </h1>
+      <h1 class="title">
+        <span class="title__names">Арай & Диас</span>
+      </h1>
 
-            <div class="hero__actions">
-                <a class="btn btn--primary" href="#rsvp">Қатысуды растаймын</a>
-                <a class="btn btn--ghost" href="#calendar">Календарь</a>
-                <a class="btn btn--ghost" href="#location">Локация</a>
-            </div>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#rsvp">Қатысуды растаймын</a>
+        <a class="btn btn--ghost" href="#calendar">Календарь</a>
+        <a class="btn btn--ghost" href="#location">Локация</a>
+      </div>
 
-            <p class="hint">Төменге түсіңіз ↓</p>
+      <p class="hint">Төменге түсіңіз ↓</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2) Календарь -->
+    <section class="section reveal" id="calendar">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Той салтанаты</h2>
+          <p class="section__subtitle">Күнін белгілеп қойыңыз 💜</p>
         </div>
-    </header>
 
-    <main>
-        <!-- 2) Календарь -->
-        <section class="section reveal" id="calendar">
-            <div class="container">
-                <div class="section__head">
-                    <h2 class="section__title">Той салтанаты</h2>
-                    <p class="section__subtitle">Күнін белгілеп қойыңыз 💜</p>
-                </div>
+        <div class="calendar-wrap">
+          <article class="card calendar-card">
+            <div class="calendar-card__top">
+              <div>
+                <div class="calendar-card__kicker">ТОЙ САЛТАНАТЫ</div>
+                <div class="calendar-card__month">26 маусым 2026 жыл</div>
+              </div>
 
-                <div class="calendar-wrap">
-                    <article class="card calendar-card">
-                        <div class="calendar-card__top">
-                            <div>
-                                <div class="calendar-card__kicker">ТОЙ САЛТАНАТЫ</div>
-                                <div class="calendar-card__month">26 маусым 2026 жыл</div>
-                            </div>
-                            <div class="calendar-card__time">
-                                <div class="calendar-card__time-label">САҒАТ</div>
-                                <div class="calendar-card__time-value">16:00</div>
-                            </div>
-                        </div>
-
-                        <div class="calendar-grid" aria-label="Маусым 2026 күнтізбесі">
-                            <div class="cal-dow">Дс</div><div class="cal-dow">Сс</div><div class="cal-dow">Ср</div><div class="cal-dow">Бс</div><div class="cal-dow">Жм</div><div class="cal-dow">Сн</div><div class="cal-dow">Жс</div>
-
-                            <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
-                            <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div>
-                            <div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div>
-                            <div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div>
-                            <div class="cal-day cal-day--active" aria-label="26 маусым 2026">26</div>
-                            <div class="cal-day">27</div><div class="cal-day">28</div>
-                            <div class="cal-day">29</div><div class="cal-day">30</div>
-                        </div>
-
-                        <div class="calendar-card__bottom tiny muted">
-                            Күніңіз сәтті өтсін — сіздерді күтеміз ✨
-                        </div>
-                    </article>
-                </div>
+              <div class="calendar-card__time">
+                <div class="calendar-card__time-label">САҒАТ</div>
+                <div class="calendar-card__time-value">16:00</div>
+              </div>
             </div>
-        </section>
 
-        <!-- 3) Локация -->
-        <section class="section reveal" id="location">
-            <div class="container">
-                <div class="section__head">
-                    <h2 class="section__title">Локация</h2>
-                    <p class="section__subtitle">Қайда өтеді</p>
-                </div>
+            <div class="calendar-grid" aria-label="Маусым 2026 күнтізбесі">
+              <div class="cal-dow">Дс</div><div class="cal-dow">Сс</div><div class="cal-dow">Ср</div><div class="cal-dow">Бс</div><div class="cal-dow">Жм</div><div class="cal-dow">Сн</div><div class="cal-dow">Жс</div>
 
-                <div class="stack">
-                    <article class="card">
-                        <h3 class="card__title">Өтетін орны</h3>
-                        <p class="card__text">
-                            <b>Ресторан:</b> «Сәт» сарайы<br>
-                            <b>Қала:</b> Семей<br>
-                            <b>Мекенжай:</b> Северная көшесі, 27
-                        </p>
-                    </article>
-                </div>
+              <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
+              <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div>
+              <div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div>
+              <div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div>
+              <div class="cal-day cal-day--active" aria-label="26 маусым 2026">26</div>
+              <div class="cal-day">27</div><div class="cal-day">28</div>
+              <div class="cal-day">29</div><div class="cal-day">30</div>
             </div>
-        </section>
 
-        <!-- 4) Дресс-код -->
-        <section class="section reveal" id="dresscode">
-            <div class="container">
-                <div class="section__head">
-                    <h2 class="section__title">Дресс-код</h2>
-                    <p class="section__subtitle">Ең бастысы — көңіл-күй</p>
-                </div>
-
-                <div class="stack">
-                    <article class="card">
-                        <p class="card__text">
-                            Өзіңізге ыңғайлы әрі жайлы киіммен келіңіздер.<br>
-                            Біз үшін ең бастысы — сіздердің келулеріңіз және көтеріңкі көңіл-күйлеріңіз.
-                        </p>
-                    </article>
-                </div>
+            <div class="calendar-card__bottom tiny muted">
+              Күніңіз сәтті өтсін — сіздерді күтеміз ✨
             </div>
-        </section>
-
-        <!-- 5) Таймер -->
-        <section class="section section--alt reveal" id="countdown">
-            <div class="container">
-                <div class="section__head">
-                    <h2 class="section__title">Тойымызға дейін қалды</h2>
-                    <p class="section__subtitle">Күтудегі ең тәтті бөлік 😌</p>
-                </div>
-
-                <div class="countdown countdown--big" aria-label="Тойға дейінгі уақыт">
-                    <div class="countdown__item">
-                        <div class="countdown__num" id="cdDays">—</div>
-                        <div class="countdown__label">күн</div>
-                    </div>
-                    <div class="countdown__item">
-                        <div class="countdown__num" id="cdHours">—</div>
-                        <div class="countdown__label">сағат</div>
-                    </div>
-                    <div class="countdown__item">
-                        <div class="countdown__num" id="cdMinutes">—</div>
-                        <div class="countdown__label">минут</div>
-                    </div>
-                    <div class="countdown__item">
-                        <div class="countdown__num" id="cdSeconds">—</div>
-                        <div class="countdown__label">секунд</div>
-                    </div>
-                </div>
-
-                <div class="center">
-                    <a class="btn btn--ghost" href="#rsvp">Қатысуды растау</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6) Той иелері -->
-        <section class="section reveal" id="owners">
-            <div class="container">
-                <div class="section__head">
-                    <h2 class="section__title">Той иелері</h2>
-                    <p class="section__subtitle">Қуанышымызға ортақтасыңыз</p>
-                </div>
-
-                <div class="stack">
-                    <article class="card owners">
-                        <div class="owners__name">Марат</div>
-                        <div class="owners__plus">+</div>
-                        <div class="owners__name">Кунсулу</div>
-
-                        <!-- ✅ Телефоны -->
-                        <div class="owners__phones">
-                            <a class="owners__phone" href="tel:+77009842657">+7 (700) 984-26-57</a>
-                            <span class="owners__sep">/</span>
-                            <a class="owners__phone" href="tel:+77713693976">+7 (771) 369-39-76</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7) RSVP -->
-        <section class="section section--alt reveal" id="rsvp">
-            <div class="container">
-                <div class="section__head">
-                    <h2 class="section__title">Қатысуды растау</h2>
-                    <p class="section__subtitle">Төмендегі форманы толтырып жіберіңіз — бізге дайындыққа өте қажет.</p>
-                </div>
-
-                <div class="rsvp">
-                    <form class="form" id="rsvpForm" autocomplete="on">
-                        <div class="field">
-                            <label class="label" for="guestName">Аты-жөніңіз</label>
-                            <input class="input" id="guestName" name="guestName" type="text" placeholder="Мысалы: Мұхамедбеков Диас" required minlength="2" />
-                        </div>
-
-                        <div class="field">
-                            <label class="label" for="attendance">Тойға қатысасыз ба?</label>
-                            <select class="input" id="attendance" name="attendance" required>
-                                <option value="" selected disabled>Таңдаңыз</option>
-                                <option value="yes">Иә, міндетті түрде келемін</option>
-                                <option value="no">Өкінішке орай, келе алмаймын</option>
-                                <option value="maybe">Әлі нақты емес</option>
-                            </select>
-                        </div>
-
-                        <div class="field field--2">
-                            <div>
-                                <label class="label" for="guestsCount">Қанша адам болып келесіз?</label>
-                                <input class="input" id="guestsCount" name="guestsCount" type="number" min="1" max="10" value="1" required />
-                            </div>
-                            <div>
-                                <label class="label" for="phone">Байланыс нөмірі (міндетті емес)</label>
-                                <input class="input" id="phone" name="phone" type="tel" placeholder="+7 ..." />
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label" for="comment">Қосымша ақпарат немесе тілектер</label>
-                            <textarea class="input textarea" id="comment" name="comment" rows="4" placeholder="Мысалы: аллергия, тағам бойынша өтініш және т.б."></textarea>
-                        </div>
-
-                        <div class="form__actions">
-                            <button class="btn btn--primary" type="submit" id="submitBtn">Жіберу</button>
-                        </div>
-
-                        <p class="tiny muted">Жауаптарыңыз кестеге автоматты түрде сақталады.</p>
-                    </form>
-
-                    <div class="thanks" id="thanksBox" hidden>
-                        <h3 class="thanks__title">Рақмет!</h3>
-                        <p class="thanks__text">Жауабыңыз қабылданды 🤍</p>
-                        <button class="btn btn--primary" type="button" id="backToFormBtn">Қайта толтыру</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- 8) Footer -->
-    <footer class="footer reveal" id="end">
-        <div class="container footer__inner">
-            <div class="footer__left">
-                <div class="footer__title">Сіздерді асыға күтеміз!</div>
-                <div class="footer__names">Диас & Арай</div>
-            </div>
-            <a class="btn btn--small btn--ghost" href="#top">Жоғары</a>
+          </article>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- 3) Локация -->
+    <section class="section reveal" id="location">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Локация</h2>
+          <p class="section__subtitle">Қайда өтеді</p>
+        </div>
+
+        <div class="stack">
+          <article class="card">
+            <h3 class="card__title">Өтетін орны</h3>
+            <p class="card__text">
+              <b>Ресторан:</b> «Сәт» сарайы<br>
+              <b>Қала:</b> Семей<br>
+              <b>Мекенжай:</b> Северная көшесі, 27
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) Дресс-код -->
+    <section class="section reveal" id="dresscode">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Дресс-код</h2>
+          <p class="section__subtitle">Ең бастысы — көңіл-күй</p>
+        </div>
+
+        <div class="stack">
+          <article class="card">
+            <p class="card__text">
+              Өзіңізге ыңғайлы әрі жайлы киіммен келіңіздер.<br>
+              Біз үшін ең бастысы — сіздердің келулеріңіз және көтеріңкі көңіл-күйлеріңіз.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5) Таймер -->
+    <section class="section section--alt reveal" id="countdown">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Тойымызға дейін қалды</h2>
+          <p class="section__subtitle">Күтудегі ең тәтті бөлік 😌</p>
+        </div>
+
+        <div class="countdown countdown--big" aria-label="Тойға дейінгі уақыт">
+          <div class="countdown__item">
+            <div class="countdown__num" id="cdDays">—</div>
+            <div class="countdown__label">күн</div>
+          </div>
+          <div class="countdown__item">
+            <div class="countdown__num" id="cdHours">—</div>
+            <div class="countdown__label">сағат</div>
+          </div>
+          <div class="countdown__item">
+            <div class="countdown__num" id="cdMinutes">—</div>
+            <div class="countdown__label">минут</div>
+          </div>
+          <div class="countdown__item">
+            <div class="countdown__num" id="cdSeconds">—</div>
+            <div class="countdown__label">секунд</div>
+          </div>
+        </div>
+
+        <div class="center">
+          <a class="btn btn--ghost" href="#rsvp">Қатысуды растау</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6) Той иелері -->
+    <section class="section reveal" id="owners">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Той иелері</h2>
+          <p class="section__subtitle">Қуанышымызға ортақтасыңыз</p>
+        </div>
+
+        <div class="stack">
+          <article class="card owners">
+            <div class="owners__name">Марат</div>
+            <div class="owners__plus">+</div>
+            <div class="owners__name">Кунсулу</div>
+
+            <div class="owners__phones">
+              <a class="owners__phone" href="tel:+77009842657">+7 (700) 984-26-57</a>
+              <span class="owners__sep">/</span>
+              <a class="owners__phone" href="tel:+77713693976">+7 (771) 369-39-76</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7) RSVP -->
+    <section class="section section--alt reveal" id="rsvp">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Қатысуды растау</h2>
+          <p class="section__subtitle">Төмендегі форманы толтырып жіберіңіз — бізге дайындыққа өте қажет.</p>
+        </div>
+
+        <div class="rsvp">
+          <form class="form" id="rsvpForm" autocomplete="on">
+            <div class="field">
+              <label class="label" for="guestName">Аты-жөніңіз</label>
+              <input class="input" id="guestName" name="guestName" type="text" placeholder="Мысалы: Мұхамедбеков Диас" required minlength="2" />
+            </div>
+
+            <div class="field">
+              <label class="label" for="attendance">Тойға қатысасыз ба?</label>
+              <select class="input" id="attendance" name="attendance" required>
+                <option value="" selected disabled>Таңдаңыз</option>
+                <option value="yes">Иә, міндетті түрде келемін</option>
+                <option value="no">Өкінішке орай, келе алмаймын</option>
+                <option value="maybe">Әлі нақты емес</option>
+              </select>
+            </div>
+
+            <div class="field field--2">
+              <div>
+                <label class="label" for="guestsCount">Қанша адам болып келесіз?</label>
+                <input class="input" id="guestsCount" name="guestsCount" type="number" min="1" max="10" value="1" required />
+              </div>
+              <div>
+                <label class="label" for="phone">Байланыс нөмірі (міндетті емес)</label>
+                <input class="input" id="phone" name="phone" type="tel" placeholder="+7 ..." />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="comment">Қосымша ақпарат немесе тілектер</label>
+              <textarea class="input textarea" id="comment" name="comment" rows="4" placeholder="Мысалы: аллергия, тағам бойынша өтініш және т.б."></textarea>
+            </div>
+
+            <div class="form__actions">
+              <button class="btn btn--primary" type="submit" id="submitBtn">Жіберу</button>
+            </div>
+
+            <p class="tiny muted">Жауаптарыңыз кестеге автоматты түрде сақталады.</p>
+          </form>
+
+          <div class="thanks" id="thanksBox" hidden>
+            <h3 class="thanks__title">Рақмет!</h3>
+            <p class="thanks__text">Жауабыңыз қабылданды 🤍</p>
+            <button class="btn btn--primary" type="button" id="backToFormBtn">Қайта толтыру</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer reveal" id="end">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <div class="footer__title">Сіздерді асыға күтеміз!</div>
+        <div class="footer__names">Арай & Диас</div>
+      </div>
+      <a class="btn btn--small btn--ghost" href="#top">Жоғары</a>
+    </div>
+  </footer>
+
+  <!-- ✅ Background music: autoplay (muted) + unmute after first user click -->
+  <audio id="bg-music" autoplay loop muted preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
 </body>
-
 </html>
-
