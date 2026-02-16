@@ -12,108 +12,25 @@ const $ = (id) => document.getElementById(id);
 const pad2 = (n) => String(n).padStart(2, "0");
 
 // =======================
-// ✅ LIVE BACKGROUND (LIGHT)
+// ✅ Mobile viewport height fix
+// =======================
+function setupVhUnit() {
+  const set = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+  set();
+  window.addEventListener("resize", set, { passive: true });
+  window.addEventListener("orientationchange", set, { passive: true });
+}
+
+// =======================
+// ✅ LIVE BACKGROUND (теперь БЕЗ движения фото)
 // =======================
 function setupLiveBackground() {
-  const bokehLayer = $("bokehLayer");
-  const sparkleLayer = $("sparkleLayer");
-  const photo = $("bgPhoto");
-  const mesh = document.querySelector(".bg__mesh");
-
-  if (!bokehLayer || !sparkleLayer) return;
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const rand = (min, max) => Math.random() * (max - min) + min;
-
-  // bokeh
-  const BOKEH_COUNT = reduceMotion ? 10 : 18;
-
-  for (let i = 0; i < BOKEH_COUNT; i++) {
-    const el = document.createElement("div");
-    el.className = "bokeh-dot";
-
-    const size = rand(120, 320);
-    const startX = rand(-10, 110);
-    const startY = rand(-10, 110);
-    const endX = startX + rand(-14, 14);
-    const endY = startY + rand(14, 34);
-
-    el.style.width = `${size}px`;
-    el.style.height = `${size}px`;
-    el.style.left = `${startX}%`;
-    el.style.top = `${startY}%`;
-
-    el.style.setProperty("--x0", "0px");
-    el.style.setProperty("--y0", "0px");
-    el.style.setProperty("--x1", `${(endX - startX) * 6}px`);
-    el.style.setProperty("--y1", `${(endY - startY) * 6}px`);
-    el.style.setProperty("--s", `${rand(0.85, 1.25)}`);
-
-    el.style.animationDuration = `${rand(16, 28)}s`;
-    el.style.animationDelay = `${rand(-10, 0)}s`;
-
-    // gentle tint variation
-    const tintPick = Math.random();
-    if (tintPick < 0.33) el.style.filter = "hue-rotate(315deg) saturate(1.05)";
-    else if (tintPick < 0.66) el.style.filter = "hue-rotate(260deg) saturate(1.05)";
-    else el.style.filter = "saturate(1.02)";
-
-    bokehLayer.appendChild(el);
-  }
-
-  // sparkles
-  const SPARKLE_COUNT = reduceMotion ? 8 : 14;
-
-  for (let i = 0; i < SPARKLE_COUNT; i++) {
-    const sp = document.createElement("div");
-    sp.className = "sparkle";
-
-    sp.style.left = `${rand(6, 94)}%`;
-    sp.style.top = `${rand(8, 92)}%`;
-
-    const s = rand(10, 20);
-    sp.style.width = `${s}px`;
-    sp.style.height = `${s}px`;
-
-    sp.style.animationDuration = `${rand(3.0, 5.6)}s`;
-    sp.style.animationDelay = `${rand(0, 4)}s`;
-
-    sparkleLayer.appendChild(sp);
-  }
-
-  if (reduceMotion) return;
-
-  // parallax (very subtle)
-  let mouseX = 0.5, mouseY = 0.5;
-  let targetX = 0.5, targetY = 0.5;
-
-  const onMove = (e) => {
-    const w = window.innerWidth || 1;
-    const h = window.innerHeight || 1;
-    targetX = e.clientX / w;
-    targetY = e.clientY / h;
-  };
-
-  window.addEventListener("mousemove", onMove, { passive: true });
-
-  function loop() {
-    mouseX += (targetX - mouseX) * 0.04;
-    mouseY += (targetY - mouseY) * 0.04;
-
-    const dx = (mouseX - 0.5) * 14;
-    const dy = (mouseY - 0.5) * 10;
-
-    const scrollY = window.scrollY || 0;
-    const scrollPar = Math.min(14, scrollY / 160);
-
-    if (photo) photo.style.transform = `scale(1.06) translate3d(${dx * 0.6}px, ${dy * 0.6 + scrollPar}px, 0)`;
-    if (mesh) mesh.style.transform = `translate3d(${dx * 0.25}px, ${dy * 0.25}px, 0) scale(1.03)`;
-
-    requestAnimationFrame(loop);
-  }
-
-  requestAnimationFrame(loop);
+  // Раньше ты двигал/скейлил bgPhoto => при contain это будет давать края.
+  // Оставляем функцию пустой, чтобы код не падал и не трогал фон.
+  return;
 }
 
 // =======================
@@ -337,6 +254,7 @@ function setupSlowAnchorScroll() {
 // START
 // =======================
 document.addEventListener("DOMContentLoaded", () => {
+  setupVhUnit();
   setupLiveBackground();
   setupBackgroundMusic();
   startCountdown();
