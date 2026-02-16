@@ -17,6 +17,30 @@ function setupVhUnit() {
   window.addEventListener("orientationchange", set, { passive: true });
 }
 
+// ✅ Ensure background covers full document height (important when .bg is absolute)
+function setupBgFullHeight() {
+  const set = () => {
+    const docH = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight,
+      document.documentElement.clientHeight
+    );
+    document.documentElement.style.setProperty("--docH", `${docH}px`);
+  };
+
+  set();
+
+  // Resize
+  window.addEventListener("resize", set, { passive: true });
+
+  // After fonts/images/layout shifts
+  window.addEventListener("load", set, { passive: true });
+
+  // If content expands (e.g., form validation, etc.)
+  const ro = new ResizeObserver(() => set());
+  ro.observe(document.body);
+}
+
 // ✅ MUSIC
 function setupBackgroundMusic() {
   const music = $("bg-music");
@@ -207,6 +231,7 @@ function setupSlowAnchorScroll() {
 
 document.addEventListener("DOMContentLoaded", () => {
   setupVhUnit();
+  setupBgFullHeight();
   setupBackgroundMusic();
   startCountdown();
   setupRSVP();
