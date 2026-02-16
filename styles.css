@@ -1,10 +1,5 @@
-/* styles.css */
+/* styles.css (MAX BG VISIBILITY MODE) */
 :root{
-  /* Светлая, тёплая база */
-  --bg1:#fbf2f7;   /* very light pink */
-  --bg2:#f6edf9;   /* light lilac */
-  --bg3:#f3eefc;   /* light lavender */
-
   --plum:#4a2367;
   --ink:rgba(45,18,62,.95);
   --muted:rgba(45,18,62,.66);
@@ -16,6 +11,7 @@
   --radius2:28px;
   --max:1100px;
 
+  /* ФОН */
   --bg-image:url("assets/bg.jpg");
 }
 
@@ -29,12 +25,13 @@ body{
   color:var(--ink);
   line-height:1.55;
   text-align:center;
-  background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
   overflow-x:hidden;
+
+  /* на всякий случай, если фон не загрузится */
+  background:#f7effa;
 }
 
 body::selection{ background:rgba(189,166,255,.28); }
-
 a{ color:inherit; text-decoration:none; }
 
 .container{
@@ -46,8 +43,7 @@ a{ color:inherit; text-decoration:none; }
 .stack{ display:grid; gap:14px; }
 
 /* =========================
-   LIVE BACKGROUND (LIGHT)
-   FIX: make photo visible
+   BG: MAX VISIBILITY
 ========================= */
 .bg{
   position:fixed;
@@ -57,130 +53,31 @@ a{ color:inherit; text-decoration:none; }
   overflow:hidden;
 }
 
-/* ✅ Фото стало заметнее */
+/* ✅ Фото: без blur/фильтров, 100% видимость */
 .bg__photo{
   position:absolute;
-  inset:-6%;
+  inset:0;
   background-image:var(--bg-image);
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  transform:scale(1.05);
-  /* было: blur(7px) ... brightness(1.08) opacity .86 */
-  filter: blur(0px) saturate(1.00) contrast(1.02) brightness(1);
-  opacity: 2;
-  will-change:transform;
+  background-attachment:fixed;
+
+  transform:none;
+  filter:none;
+  opacity:1;
 }
 
-/* ✅ Тинт теперь НЕ выбеливает картинку */
-.bg__tint{
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(1100px 760px at 50% -10%, rgba(255,232,242,.22), transparent 70%),
-    radial-gradient(900px 620px at 18% 22%, rgba(197,178,255,.16), transparent 70%),
-    radial-gradient(900px 620px at 85% 25%, rgba(238,178,208,.14), transparent 70%),
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.09));
-  opacity:.40; /* было 1 */
-}
-
-/* ✅ Mesh очень мягкий, только “дыхание” */
-.bg__mesh{
-  position:absolute;
-  inset:-18%;
-  background:
-    radial-gradient(520px 420px at 20% 18%, rgba(189,166,255,.12), transparent 75%),
-    radial-gradient(520px 420px at 82% 22%, rgba(227,155,191,.10), transparent 75%),
-    radial-gradient(620px 520px at 50% 88%, rgba(129,95,245,.07), transparent 75%);
-  filter: blur(14px);
-  opacity:.45; /* было .85 */
-  animation: meshFloat 22s ease-in-out infinite alternate;
-  will-change:transform;
-}
-
-@keyframes meshFloat{
-  0%{ transform:translate3d(-1.2%, -0.8%, 0) scale(1.02); }
-  100%{ transform:translate3d(1.2%, 0.8%, 0) scale(1.03); }
-}
-
-/* bokeh */
-.bg__bokeh{
-  position:absolute;
-  inset:0;
-  opacity:.55; /* чуть ниже, чтобы не “мылить” */
-}
-
-.bokeh-dot{
-  position:absolute;
-  border-radius:999px;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.70), rgba(255,255,255,0) 62%);
-  mix-blend-mode:screen;
-  opacity:.12;
-  will-change:transform, opacity;
-  animation: bokehDrift linear infinite;
-}
-
-@keyframes bokehDrift{
-  from { transform: translate3d(var(--x0), var(--y0), 0) scale(var(--s)); }
-  to   { transform: translate3d(var(--x1), var(--y1), 0) scale(calc(var(--s) * 1.08)); }
-}
-
-/* sparkles */
-.bg__sparkles{
-  position:absolute;
-  inset:0;
-}
-
-.sparkle{
-  position:absolute;
-  width:18px;
-  height:18px;
-  transform:translate(-50%,-50%);
-  opacity:0;
-  animation: sparklePop ease-in-out infinite;
-  will-change:transform, opacity;
-}
-
-.sparkle::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle, rgba(255,255,255,.90) 0 18%, rgba(255,255,255,0) 58%),
-    conic-gradient(from 45deg,
-      rgba(255,255,255,0) 0 10%,
-      rgba(255,255,255,.80) 10% 15%,
-      rgba(255,255,255,0) 15% 35%,
-      rgba(255,255,255,.65) 35% 40%,
-      rgba(255,255,255,0) 40% 60%,
-      rgba(255,255,255,.80) 60% 65%,
-      rgba(255,255,255,0) 65% 85%,
-      rgba(255,255,255,.65) 85% 90%,
-      rgba(255,255,255,0) 90% 100%);
-  border-radius:6px;
-  transform:rotate(10deg);
-  filter: drop-shadow(0 10px 18px rgba(35,15,55,.18));
-}
-
-@keyframes sparklePop{
-  0%   { opacity:0; transform:translate(-50%,-50%) scale(.65) rotate(0deg); }
-  22%  { opacity:.20; transform:translate(-50%,-50%) scale(1) rotate(10deg); }
-  55%  { opacity:.10; transform:translate(-50%,-50%) scale(.92) rotate(25deg); }
-  100% { opacity:0; transform:translate(-50%,-50%) scale(.7) rotate(40deg); }
-}
-
-/* grain - light */
+/* ❌ Все “влияющие” слои выключаем полностью */
+.bg__tint,
+.bg__mesh,
+.bg__bokeh,
+.bg__sparkles,
 .bg__grain{
-  position:absolute;
-  inset:0;
-  opacity:.045;
-  mix-blend-mode:soft-light;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-  background-repeat:repeat;
-  transform:translateZ(0);
+  display:none !important;
 }
 
-/* watermark */
+/* watermark (оставим, но сделаем слабее чтобы не мешал) */
 .site-watermark{
   position:fixed;
   inset:0;
@@ -190,13 +87,14 @@ a{ color:inherit; text-decoration:none; }
   font-weight:700;
   font-size:clamp(160px,24vw,380px);
   letter-spacing:.04em;
-  color:rgba(74,35,103,.06);
+  color:rgba(74,35,103,.03); /* было сильнее — теперь почти не видно */
   pointer-events:none;
   user-select:none;
   z-index:2;
   transform:translateY(2vh);
 }
 
+/* контент поверх */
 .hero, main, footer{ position:relative; z-index:3; }
 
 /* =========================
@@ -210,19 +108,17 @@ a{ color:inherit; text-decoration:none; }
   overflow:hidden;
 }
 
-/* ✅ hero overlay чуть слабее, чтоб фон не “выгорал” */
+/* ✅ чтобы фон не “съедался”, overlay почти убираем */
 .hero__overlay{
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(900px 520px at 50% 15%, rgba(255,255,255,.35), rgba(255,255,255,.08)),
-    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.06));
+  background:transparent;
   pointer-events:none;
 }
 
 .hero__content{ position:relative; padding:68px 0; }
 
-/* glass on light background */
+/* UI элементы (как у тебя было) */
 .badge{
   display:inline-flex;
   align-items:center;
@@ -230,12 +126,12 @@ a{ color:inherit; text-decoration:none; }
   padding:12px 18px;
   border-radius:999px;
   border:1px solid rgba(123,77,187,.22);
-  background:rgba(255,255,255,.78);
-  box-shadow:0 12px 35px rgba(35,15,55,.12);
+  background:rgba(255,255,255,.86);
+  box-shadow:0 12px 35px rgba(35,15,55,.14);
   letter-spacing:.16em;
   text-transform:uppercase;
   color:rgba(74,35,103,.88);
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(10px);
 }
 
 .badge--big{
@@ -251,9 +147,9 @@ a{ color:inherit; text-decoration:none; }
   padding:clamp(18px,3vw,34px);
   border-radius:var(--radius2);
   border:1px solid rgba(123,77,187,.16);
-  background:rgba(255,255,255,.80);
-  backdrop-filter:blur(14px);
-  box-shadow:0 18px 55px rgba(35,15,55,.12);
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(12px);
+  box-shadow:0 18px 55px rgba(35,15,55,.14);
 }
 
 .invite-text__lead{
@@ -267,7 +163,7 @@ a{ color:inherit; text-decoration:none; }
   margin:0 auto;
   max-width:760px;
   font-size:clamp(15px,1.7vw,18px);
-  color:rgba(45,18,62,.92);
+  color:rgba(45,18,62,.90);
   line-height:1.75;
 }
 
@@ -276,7 +172,7 @@ a{ color:inherit; text-decoration:none; }
   color:var(--plum);
   padding:2px 10px;
   border-radius:999px;
-  background:linear-gradient(90deg, rgba(189,166,255,.34), rgba(255,220,210,.26));
+  background:linear-gradient(90deg, rgba(189,166,255,.38), rgba(255,220,210,.30));
   border:1px solid rgba(123,77,187,.12);
   white-space:nowrap;
 }
@@ -288,7 +184,7 @@ a{ color:inherit; text-decoration:none; }
   font-size:clamp(52px,7vw,92px);
   font-weight:400;
   color:var(--plum);
-  text-shadow:0 2px 0 rgba(255,255,255,.80), 0 18px 46px rgba(35,15,55,.18);
+  text-shadow:0 2px 0 rgba(255,255,255,.75), 0 18px 46px rgba(35,15,55,.20);
 }
 
 .hero__actions{
@@ -301,22 +197,22 @@ a{ color:inherit; text-decoration:none; }
 
 .btn{
   border:1px solid rgba(123,77,187,.22);
-  background:rgba(255,255,255,.76);
+  background:rgba(255,255,255,.74);
   color:rgba(45,18,62,.94);
   padding:13px 18px;
   border-radius:999px;
   cursor:pointer;
   font-weight:700;
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
-  box-shadow:0 12px 30px rgba(35,15,55,.12);
+  box-shadow:0 12px 30px rgba(35,15,55,.14);
   backdrop-filter:blur(10px);
 }
 
-.btn:hover{ transform:translateY(-2px); box-shadow:0 18px 42px rgba(35,15,55,.16); }
+.btn:hover{ transform:translateY(-2px); box-shadow:0 18px 42px rgba(35,15,55,.18); }
 .btn:active{ transform:translateY(0); }
 
 .btn--primary{
-  background:linear-gradient(90deg, rgba(189,166,255,.92), rgba(227,155,191,.86));
+  background:linear-gradient(90deg, rgba(189,166,255,.95), rgba(227,155,191,.90));
   border-color:rgba(123,77,187,.18);
   color:rgba(45,18,62,.96);
 }
@@ -326,9 +222,9 @@ a{ color:inherit; text-decoration:none; }
 
 .hint{
   margin-top:18px;
-  color:rgba(74,35,103,.70);
+  color:rgba(74,35,103,.78);
   font-size:13px;
-  text-shadow:0 6px 18px rgba(255,255,255,.65);
+  text-shadow:0 6px 18px rgba(255,255,255,.55);
 }
 
 /* =========================
@@ -337,9 +233,9 @@ a{ color:inherit; text-decoration:none; }
 .section{ padding:72px 0; }
 
 .section--alt{
-  background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(189,166,255,.10));
-  border-top:1px solid rgba(255,255,255,.38);
-  border-bottom:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.35);
+  border-top:1px solid rgba(255,255,255,.35);
+  border-bottom:1px solid rgba(255,255,255,.30);
 }
 
 .section__head{ text-align:center; margin-bottom:18px; }
@@ -359,13 +255,12 @@ a{ color:inherit; text-decoration:none; }
   font-size:15px;
 }
 
-/* CARD */
 .card{
   padding:18px;
   border:1px solid rgba(123,77,187,.14);
-  background:rgba(255,255,255,.82);
+  background:rgba(255,255,255,.86);
   border-radius:var(--radius2);
-  box-shadow:0 18px 55px rgba(35,15,55,.12);
+  box-shadow:0 18px 55px rgba(35,15,55,.14);
   backdrop-filter:blur(12px);
   text-align:center;
 }
@@ -387,17 +282,6 @@ a{ color:inherit; text-decoration:none; }
   width:100%;
   position:relative;
   overflow:hidden;
-}
-
-.calendar-card::before{
-  content:"";
-  position:absolute;
-  inset:-40px;
-  background:
-    radial-gradient(420px 280px at 20% 0%, rgba(255,245,235,.45), transparent 60%),
-    radial-gradient(420px 280px at 80% 15%, rgba(227,155,191,.20), transparent 62%),
-    radial-gradient(420px 280px at 50% 30%, rgba(189,166,255,.18), transparent 62%);
-  pointer-events:none;
 }
 
 .calendar-card__top{
@@ -468,7 +352,7 @@ a{ color:inherit; text-decoration:none; }
 .cal-day--active{
   background:linear-gradient(180deg, rgba(189,166,255,.92), rgba(227,155,191,.78));
   border-color:rgba(123,77,187,.22);
-  box-shadow:0 16px 40px rgba(35,15,55,.14);
+  box-shadow:0 16px 40px rgba(35,15,55,.16);
   transform:translateY(-1px);
 }
 
@@ -496,7 +380,7 @@ a{ color:inherit; text-decoration:none; }
   background:rgba(255,255,255,.78);
   border-radius:var(--radius);
   backdrop-filter:blur(12px);
-  box-shadow:0 12px 38px rgba(35,15,55,.12);
+  box-shadow:0 12px 38px rgba(35,15,55,.14);
 }
 
 .countdown__num{
@@ -555,7 +439,6 @@ a{ color:inherit; text-decoration:none; }
   transition:opacity .2s ease;
 }
 .owners__phone:hover{ opacity:.85; }
-
 .owners__sep{ color:rgba(45,18,62,.55); }
 
 /* RSVP */
@@ -570,9 +453,9 @@ a{ color:inherit; text-decoration:none; }
 .form{
   padding:18px;
   border:1px solid rgba(123,77,187,.14);
-  background:rgba(255,255,255,.84);
+  background:rgba(255,255,255,.86);
   border-radius:var(--radius2);
-  box-shadow:0 18px 55px rgba(35,15,55,.12);
+  box-shadow:0 18px 55px rgba(35,15,55,.14);
   backdrop-filter:blur(12px);
   text-align:center;
 }
@@ -626,9 +509,9 @@ a{ color:inherit; text-decoration:none; }
 .thanks{
   padding:18px;
   border:1px solid rgba(227,155,191,.35);
-  background:rgba(255,245,235,.26);
+  background:rgba(255,245,235,.22);
   border-radius:var(--radius2);
-  box-shadow:0 18px 55px rgba(35,15,55,.12);
+  box-shadow:0 18px 55px rgba(35,15,55,.14);
   backdrop-filter:blur(12px);
 }
 
@@ -651,7 +534,7 @@ a{ color:inherit; text-decoration:none; }
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  border-top:1px solid rgba(255,255,255,.55);
+  border-top:1px solid rgba(255,255,255,.35);
   padding-top:18px;
 }
 
@@ -687,12 +570,3 @@ a{ color:inherit; text-decoration:none; }
   .owners__phones{ flex-direction:column; gap:6px; }
   .owners__sep{ display:none; }
 }
-
-/* Reduce motion */
-@media (prefers-reduced-motion: reduce){
-  .bg__mesh{ animation:none; }
-  .bokeh-dot{ animation:none; }
-  .sparkle{ animation:none; opacity:.08; }
-}
-
-
