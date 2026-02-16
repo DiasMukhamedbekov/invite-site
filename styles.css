@@ -1,4 +1,3 @@
-/* styles.css (FIT TO SCREEN MODE) */
 :root{
   --plum:#4a2367;
   --ink:rgba(45,18,62,.95);
@@ -48,7 +47,7 @@ a{ color:inherit; text-decoration:none; }
 .stack{ display:grid; gap:14px; }
 
 /* =========================
-   BG: FIT TO SCREEN (contain)
+   BG: WIDER ON DESKTOP
 ========================= */
 .bg{
   position:fixed;
@@ -57,26 +56,36 @@ a{ color:inherit; text-decoration:none; }
   pointer-events:none;
   overflow:hidden;
 
-  /* чтобы при contain не было "черных" полей — мягкий фон */
+  /* чтобы при любых режимах не было “пустого” фона */
   background:radial-gradient(1200px 700px at 50% 25%, rgba(227,155,191,.22), transparent 40%),
              radial-gradient(900px 600px at 40% 70%, rgba(189,166,255,.20), transparent 55%),
              #f7effa;
 }
 
-/* ✅ Фото: всегда в пределах экрана (не вылезает) */
+/* ✅ Фото: расширяем влево-вправо на широких экранах */
 .bg__photo{
   position:absolute;
   inset:0;
 
   background-image: var(--bg-image);
   background-repeat:no-repeat;
-  background-position:center center;
 
-  /* ключевое: полностью помещаем картинку в экран */
-  background-size: contain;
+  /* центр + чуть выше, чтобы лица/детали обычно не “резались” */
+  background-position:center top;
+
+  /* ✅ ключевое: не “узкое” на десктопе */
+  background-size: cover;
 
   /* никаких трансформаций от JS */
   transform:none !important;
+}
+
+/* ✅ На очень узких/высоких экранах лучше сохранить “вписывание” */
+@media (max-width: 700px), (max-aspect-ratio: 3/4){
+  .bg__photo{
+    background-size: contain;
+    background-position:center center;
+  }
 }
 
 /* ❌ Все “влияющие” слои можно оставить выключенными */
@@ -587,4 +596,3 @@ a{ color:inherit; text-decoration:none; }
   .owners__phones{ flex-direction:column; gap:6px; }
   .owners__sep{ display:none; }
 }
-
