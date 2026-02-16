@@ -14,8 +14,8 @@
   --vh: 1vh;
 
   /* Тонкая подстройка кадра */
-  --bg-pos-x: 50%;
-  --bg-pos-y: 50%;
+  --bg-pos-x: 25%;
+  --bg-pos-y: 25%;
 }
 
 *{ box-sizing:border-box; }
@@ -262,3 +262,4 @@ a{ color:inherit; text-decoration:none; }
   .owners__phones{ flex-direction:column; gap:6px; }
   .owners__sep{ display:none; }
 }
+
